@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app="PrimeiroApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../dirjs/angular.min.js"></script>
+    <script src="/controller/controller.js"></script>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <title>Teste AngularJS</title>
+</head>
+
+<body ng-controller="PrimeiroController">
+    <nav class="navbar navbar-expand-sm bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand">Teste AngularJS</a>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/controller/controller.html">Criar Conta</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h4>Olá, {{nome}} </h4>
+        <label for="">Nome</label>
+        <input type="text" class="form-control input-lg">
+    </div>
+
+    <div class="container">
+        <label for="">Sobrenome</label>
+        <input type="text" class="form-control input-lg">
+    </div>
+
+    <div class="container">
+        <button type="button" class="btn btn-primary" ng-click="click()">Primary</button>
+    </div>
+
+    <p ng-class="{'text-center': center, 'text-danger': error}">
+        Lorem ipsum dolor sit amet
+        </p>
+
+        <label><input type="checkbox" ng-model="center">
+            text-center</label>
+            <label><input type="checkbox" ng-model="error"> text-danger</label>
+
+            
+</body>
+
+</html>

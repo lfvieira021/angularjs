@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/dirjs/angular.min.js"></script>
+    <script src="/contatos/contatos.js"></script>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./contatos.css">
+    <title>Lista Telefone</title>
+</head>
+
+<body ng-controller="telefoneController">
+    <nav class="navbar navbar-expand-sm bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand">Teste AngularJS</a>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/controller/controller.html">Criar Conta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contatos/contatos.html">Lista Telefonica</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="jumbotron">
+        <h2>Lista Telefonica</h2>
+        <table ng-if="contatos.length > 0" class="table table-striped">
+            <tr>
+                <th></th>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>Operadora</th>
+            </tr>
+
+            <tr ng-class="{'selecionado negrito': contato.selecionado}" ng-repeat="contato in contatos">
+                <td><input type="checkbox" ng-model="contato.selecionado"></td>
+                <td>{{contato.nome}}</td>
+                <td>{{contato.telefone}}</td>
+                <td>{{contato.operadora.nome}}</td>
+            </tr>
+
+        </table>
+
+        <form name="contatoForm">
+            <input class="form-control" type="text" ng-model="contato.nome" name="nome" placeholder="Nome" ng-required="true" ng-minlength="4">
+            <p class="requireLength" ng-if="contatoForm.nome.$error.minlength">Seu nome tem que ter no minimo 4 letras!</p>
+            <input class="form-control" type="text" name="telefone" ng-model="contato.telefone" placeholder="Telefone" ng-required="true" ng-minlength="8">
+            <p class="requireLength"ng-if=contatoForm.telefone.$error.minlength >Telefone invalido!</p>
+            <select class="form-select form-control" ng-model="contato.operadora"
+                ng-options="operadora.nome group by operadora.categoria for operadora in operadoras">
+                <option value="">Selecione uma operadora</option>
+            </select>
+        </form>
+        <div class="alert alert-danger" ng-if="contatoForm.$error.required && contatoForm.$dirty">
+            <p>Por favor, preencha todos os campos!</p> 
+        </div>
+        <button class="btn btn-primary" ng-click="adicionarContato(contato)" ng-disabled="contatoForm.$invalid">Adicionar Contato</button>
+        <div class="botao-apagar">
+            <button class="btn btn-danger" ng-click="apagarContato(contatos)"
+                ng-if="isContatoSelecionado(contatos)">Apagar Contatos</button>
+        </div>
+
+
+    </div>
+</body>
+
+</html>
